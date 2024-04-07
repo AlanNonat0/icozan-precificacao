@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('cellphone');
             $table->string('document');
+            $table->unsignedBigInteger('type_id')->default(2); // 1 owner | 2 collaborator
             $table->unsignedBigInteger('document_type_id')->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('document_type_id')->references('id')->on('document_types');
+            $table->foreign('type_id')->references('id')->on('user_types');
         });
     }
 
